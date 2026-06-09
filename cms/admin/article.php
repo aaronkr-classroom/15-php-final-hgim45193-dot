@@ -66,7 +66,7 @@ if ($temp and $_FILES['image']['error'] === 0) {
           $article['image_file'] = create_filename($_FILES['image']['name'], $uploads);
           $destination = $uploads . $article['image_file'];
   }
-}
+
 
 
 
@@ -136,7 +136,8 @@ if ($invalid) {
       }
     }
   }
-    $article['image_file'] = $saved_image ? $article['image_file'] : ''; ...
+}
+$article['image_file'] = $saved_image ? $article['image_file'] : '';
 ?>
 <?php include '../includes/admin-header.php'; ?>
   <form action="article.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
