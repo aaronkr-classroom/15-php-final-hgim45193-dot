@@ -21,7 +21,7 @@ $article = [
 ];  // 기사 데이터
 $errors = [
     'warning' => '', 'title'    => '', 'summary'    => '', 'content'       => '',
-    'author'  => '', 'category' => '', 'image_file' => ''. 'image_alt'     => '',
+    'author'  => '', 'category' => '', 'image_file' => '', 'image_alt'     => '',
 ];  // 오류 메시지
 // 아이다가 있다면, 페이지는 기사 편집
 if ($id) {
@@ -53,7 +53,7 @@ if ($temp and $_FILES['image']['error'] === 0) {
       $article['image_alt'] = $_POST['image_alt'];
       // 이미지 파일 유효성 검사
       $errors['image_file'] .= in_array(mime_content_type($temp), $file_types)
-          ? '' : 'Wrong file type. ':                           // 파일 타입 검사
+          ? '' : 'Wrong file type. ';                           // 파일 타입 검사
       $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
       $errors['image_file'] .= in_array($ext, $file_extensions)
           ? '' : 'Wrong file extension. ';
@@ -83,7 +83,7 @@ $article['published']     =(isset($_POST['published'])
 $errors['title']   = is_text($article['title'], 1, 80)
     ? '' : 'Title must be 1-80 characters';
 $errors['summary'] = is_text($article['summary'], 1, 254)
-    ? '' : 'Summary must be 1-254 characters':
+    ? '' : 'Summary must be 1-254 characters';
 $errors['content'] = is_text($article['content'], 1, 100000)
     ? '' : 'Article must be 1-100,000 characters';
 $errors['member'] = is_member_id($article['member_id'], $authors)
@@ -127,7 +127,7 @@ if ($invalid) {
   } catch (PDOException $e) {
     $pdo->rollBack();
     if (file_exists($destination)) {
-        unlink($destination):
+        unlink($destination);
   } // 예외가 PDOException이고 무결성 제약에 걸렸다면
     if ($e->errorInfo[1] == (1062)) {
         $errors['warning'] = 'Article title already used';
